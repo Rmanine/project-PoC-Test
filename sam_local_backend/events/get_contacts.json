@@ -1,0 +1,12 @@
+{
+  "routeKey": "GET /contacts",
+  "requestContext": {
+    "authorizer": {
+      "jwt": {
+        "claims": {
+          "sub": "test-user-123"
+        }
+      }
+    }
+  }
+}
