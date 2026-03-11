@@ -3,8 +3,16 @@ import os
 from AwsDynamoApi import AwsDynamoApi
 
 def lambda_handler(event, context):
-    dynamodb = boto3.resource("dynamodb")
+    is_local = os.environ.get("AWS_SAM_LOCAL")
+    
+    dynamodb = boto3.resource(
+        "dynamodb",
+        endpoint_url="http://172.17.0.1:8000" if is_local else None,
+        region_name="eu-north-1"
+    )
+    
     table = dynamodb.Table(os.environ["TABLE_NAME"])
+    db = AwsDynamoApi(table)
 
     db =  AwsDynamoApi(table)
 
