@@ -25,6 +25,10 @@ coverage:
 build:
 	source ./venv/bin/activate && sam build
 
+deploy:
+	source ./venv/bin/activate &&  sam build
+	source ./venv/bin/activate &&  sam deploy
+
 #############
 #  Helpers  #
 #############
@@ -36,6 +40,8 @@ define HELP_MESSAGE
 	Commands:
 
 	build     Build Lambda function and dependencies
+	deploy    Deploy subsequent changes
+	
 	install   Install application and dev dependencies defined in requirements.txt
 	deps      Install project dependencies locally
 	test      Run unit test locally using mocks

@@ -14,32 +14,17 @@ Globals:
     LoggingConfig:
       LogFormat: JSON
 Resources:
-  TrustedContactsFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
     Properties:
-      CodeUri: trusted_contacts/
-      Handler: lambda_function.lambda_handler
+      CodeUri: hello_world/        # <- punta alla cartella
+      Handler: app.lambda_handler  # <- file.funzione
       Runtime: python3.12
-      Environment:
-        Variables:
-          TABLE_NAME: localtable
-      Architectures:
-      - x86_64
-      Events:
-        GetContacts:
-          Type: HttpApi # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /contacts
-            Method: GET
-      
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  TrustedContactsApi:
-    Description: API Gateway endpoint local URL
-    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/contacts"
-  TrustedContactsFunction:
+  HelloWorldFunction:
     Description: Trusted Contacts Lambda Function ARN
-    Value: !GetAtt TrustedContactsFunction.Arn
+    Value: !GetAtt HelloWorldFunction.Arn
