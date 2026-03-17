@@ -18,6 +18,10 @@ deps:
 test:
 	source ./venv/bin/activate && pytest -v -s tests/unit/
 
+coverage:
+	source ./venv/bin/activate &&  coverage run --branch -m pytest -v -s tests/unit/
+	source ./venv/bin/activate &&  coverage report -m
+
 build:
 	source ./venv/bin/activate && sam build
 
@@ -35,6 +39,7 @@ define HELP_MESSAGE
 	install   Install application and dev dependencies defined in requirements.txt
 	deps      Install project dependencies locally
 	test      Run unit test locally using mocks
+	coverage  Run unit test coverage reports
 
 	clean     Cleans up local build artifacts and environment
 
