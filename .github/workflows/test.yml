@@ -20,7 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: false
           fetch-depth: 0
 
       - name: Set up Python
@@ -62,7 +61,7 @@ jobs:
         run: |
           sed -i '/<!-- Pytest Coverage Comment:Begin -->/,/<!-- Pytest Coverage Comment:End -->/c\<!-- Pytest Coverage Comment:Begin -->\n${{ steps.coverage_badge.outputs.coverageHtml }}\n<!-- Pytest Coverage Comment:End -->' ./README.md
 
-      - name: Commit changes README
+      - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'docs: aggiorna badge coverage'
