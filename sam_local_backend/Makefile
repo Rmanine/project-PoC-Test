@@ -19,17 +19,11 @@ test:
 	source ./venv/bin/activate && pytest -v -s tests/unit/
 
 coverage:
-	source ./venv/bin/activate && pytest \
-		--cov=sam_local_backend \
-		--cov-branch \
-		--cov-report=term-missing:skip-covered \
-		--cov-report=xml:coverage.xml \
-		--junitxml=pytest.xml \
-		tests/unit/ | tee pytest-coverage.txt
+	source ./venv/bin/activate && pytest --junitxml=pytest.xml --cov-report=term-missing --cov=src tests/unit/ | tee pytest-coverage.txt
 
 coverage-html:
 	source ./venv/bin/activate && pytest -v -s \
-		--cov=sam_local_backend \
+		--cov=src \
 		--cov-branch \
 		--cov-report=html:htmlcov \
 		tests/unit/

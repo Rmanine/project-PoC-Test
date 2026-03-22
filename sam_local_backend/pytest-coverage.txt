@@ -1,17 +1,21 @@
 ============================= test session starts ==============================
-platform linux -- Python 3.12.3, pytest-9.0.2, pluggy-1.6.0 -- /home/riccardomani/Documenti/università/SWE/project-PoC-Test/sam_local_backend/venv/bin/python3
-cachedir: .pytest_cache
+platform linux -- Python 3.12.3, pytest-9.0.2, pluggy-1.6.0
 rootdir: /home/riccardomani/Documenti/università/SWE/project-PoC-Test/sam_local_backend
 plugins: cov-7.1.0
-collecting ... collected 4 items
+collected 4 items
 
-tests/unit/test_crud_trusted_contacts.py::test_add_contact PASSED
-tests/unit/test_crud_trusted_contacts.py::test_delete_contact PASSED
-tests/unit/test_crud_trusted_contacts.py::test_delete_contact_Failed PASSED
-tests/unit/test_handler.py::test_lambda_handler PASSED
-WARNING: Failed to generate report: No data to report.
-
-
+tests/unit/test_crud_trusted_contacts.py ...                             [ 75%]
+tests/unit/test_handler.py .                                             [100%]
 
 - generated xml file: /home/riccardomani/Documenti/università/SWE/project-PoC-Test/sam_local_backend/pytest.xml -
-============================== 4 passed in 2.01s ===============================
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.12.3-final-0 ________________
+
+Name                                   Stmts   Miss  Cover   Missing
+--------------------------------------------------------------------
+src/hello_world/__init__.py                0      0   100%
+src/hello_world/app.py                     3      0   100%
+src/trusted_contacts/AwsDynamoApi.py      37      8    78%   39-51, 76-80
+--------------------------------------------------------------------
+TOTAL                                     40      8    80%
+============================== 4 passed in 2.13s ===============================

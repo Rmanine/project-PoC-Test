@@ -4,7 +4,7 @@ import pytest
 from moto import mock_aws
 from uuid import uuid4
 
-from trusted_contacts.AwsDynamoApi import AwsDynamoApi
+from src.trusted_contacts.AwsDynamoApi import AwsDynamoApi
 
 TABLE_NAME = "Prova-table"
 TEST_CONTACT_ID = str(uuid4())
