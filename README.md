@@ -1,9 +1,14 @@
 [![AWS: Lambda](https://img.shields.io/badge/AWS-Lambda-blueviolet)](https://img.shields.io/badge/AWS-Lambda-blueviolet)
+<<<<<<< HEAD
 ![Python](https://img.shields.io/badge/python-3.11-blue?logo=python)
 
 <!-- Pytest Coverage Comment:Begin -->
 <!-- Pytest Coverage Comment:End -->
 
+=======
+[![AWS: DynamoDB](https://img.shields.io/badge/AWS-DynamoDB-blueviolet)](https://img.shields.io/badge/AWS-DynamoDB-blueviolet)
+[![AWS: S#](https://img.shields.io/badge/AWS-S3-green)](https://img.shields.io/badge/AWS-AWS-S3-green)
+>>>>>>> c556f30b882177660ea52ed900627d28bee05f38
 # PoC - L’app che Protegge e Trasforma
 
 Proof of Concept per il capitolato C4 - L’ app che Protegge e Trasforma - del corso di Ingegneria del Software 2025/2026.
