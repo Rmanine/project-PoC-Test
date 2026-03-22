@@ -19,7 +19,7 @@ test:
 	source ./venv/bin/activate && pytest -v -s tests/unit/
 
 coverage:
-	source ./venv/bin/activate && pytest -v -s \
+	source ./venv/bin/activate && pytest \
 		--cov=sam_local_backend \
 		--cov-branch \
 		--cov-report=term-missing:skip-covered \
