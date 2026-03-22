@@ -2,6 +2,7 @@
 ![Python](https://img.shields.io/badge/python-3.11-blue?logo=python)
 
 <!-- Pytest Coverage Comment:Begin -->
+<a href="https://github.com/Rmanine/project-PoC-Test/blob/main/README.md"><img alt="Coverage" src="https://img.shields.io/badge/Coverage-80%25-green.svg" /></a><details><summary>Coverage Report </summary><table><tr><th>File</th><th>Stmts</th><th>Miss</th><th>Cover</th><th>Missing</th></tr><tbody><tr><td colspan="5"><b>src/hello_world</b></td></tr><tr><td>&nbsp; &nbsp;<a href="https://github.com/Rmanine/project-PoC-Test/blob/main/src/hello_world/__init__.py">__init__.py</a></td><td>0</td><td>0</td><td>100%</td><td>&nbsp;</td></tr><tr><td>&nbsp; &nbsp;<a href="https://github.com/Rmanine/project-PoC-Test/blob/main/src/hello_world/app.py">app.py</a></td><td>3</td><td>0</td><td>100%</td><td>&nbsp;</td></tr><tr><td colspan="5"><b>src/trusted_contacts</b></td></tr><tr><td>&nbsp; &nbsp;<a href="https://github.com/Rmanine/project-PoC-Test/blob/main/src/trusted_contacts/AwsDynamoApi.py">AwsDynamoApi.py</a></td><td>37</td><td>8</td><td>78%</td><td><a href="https://github.com/Rmanine/project-PoC-Test/blob/main/src/trusted_contacts/AwsDynamoApi.py#L39-L51">39&ndash;51</a>, <a href="https://github.com/Rmanine/project-PoC-Test/blob/main/src/trusted_contacts/AwsDynamoApi.py#L76-L80">76&ndash;80</a></td></tr><tr><td><b>TOTAL</b></td><td><b>40</b></td><td><b>8</b></td><td><b>80%</b></td><td>&nbsp;</td></tr></tbody></table></details>
 <!-- Pytest Coverage Comment:End -->
 
 # PoC - L’app che Protegge e Trasforma
