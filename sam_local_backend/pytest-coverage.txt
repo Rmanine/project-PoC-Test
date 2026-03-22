@@ -14,4 +14,4 @@ WARNING: Failed to generate report: No data to report.
 
 
 - generated xml file: /home/riccardomani/Documenti/università/SWE/project-PoC-Test/sam_local_backend/pytest.xml -
-============================== 4 passed in 2.00s ===============================
+============================== 4 passed in 2.01s ===============================
