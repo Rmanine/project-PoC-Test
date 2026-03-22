@@ -1,9 +1,9 @@
-SHELL := /bin/bash  # <- aggiunge questa riga in cima
+SHELL := /bin/bash
 PIP ?= pip3
 PYTHON ?= python3
 
 clean:
-	rm -rf ./venv/
+	rm -rf ./venv/ .coverage coverage.xml pytest-coverage.txt pytest.xml htmlcov/
 
 checkOSDependencies:
 	$(PYTHON) --version
@@ -19,8 +19,22 @@ test:
 	source ./venv/bin/activate && pytest -v -s tests/unit/
 
 coverage:
-	source ./venv/bin/activate &&  coverage run --branch -m pytest -v -s tests/unit/
-	source ./venv/bin/activate &&  coverage report -m
+	source ./venv/bin/activate && pytest -v -s \
+		--cov=sam_local_backend \
+		--cov-branch \
+		--cov-report=term-missing:skip-covered \
+		--cov-report=xml:coverage.xml \
+		--junitxml=pytest.xml \
+		tests/unit/ | tee pytest-coverage.txt
+
+coverage-html:
+	source ./venv/bin/activate && pytest -v -s \
+		--cov=sam_local_backend \
+		--cov-branch \
+		--cov-report=html:htmlcov \
+		tests/unit/
+	@echo "Report disponibile in htmlcov/index.html"
+	@open htmlcov/index.html 2>/dev/null || xdg-open htmlcov/index.html 2>/dev/null || true
 
 build:
 	source ./venv/bin/activate && sam build
@@ -39,14 +53,14 @@ define HELP_MESSAGE
 
 	Commands:
 
-	build     Build Lambda function and dependencies
-	deploy    Deploy subsequent changes
+	build     		Build Lambda function and dependencies
+	deploy    		Deploy subsequent changes
 	
-	install   Install application and dev dependencies defined in requirements.txt
-	deps      Install project dependencies locally
-	test      Run unit test locally using mocks
-	coverage  Run unit test coverage reports
+	install			Install application and dev dependencies defined in requirements.txt
+	deps      		Install project dependencies locally
+	coverage  		Run tests + genera coverage.xml e pytest.xml (usati dalla CI)
+    coverage-html 	Apre il report HTML nel browser
 
-	clean     Cleans up local build artifacts and environment
+	clean     		Cleans up local build artifacts and environment
 
 endef
