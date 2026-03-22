@@ -1,3 +1,5 @@
+![DynamoDB](https://img.shields.io/badge/DynamoDB-4053D6?logo=amazondynamodb&logoColor=white) ![Lambda](https://img.shields.io/badge/AWS_Lambda-FF9900?logo=awslambda&logoColor=white) ![S3](https://img.shields.io/badge/S3-569A31?logo=amazons3&logoColor=white)
+
 # PoC - L’app che Protegge e Trasforma
 
 Proof of Concept per il capitolato C4 - L’ app che Protegge e Trasforma - del corso di Ingegneria del Software 2025/2026.
