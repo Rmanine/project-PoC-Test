@@ -5,34 +5,66 @@
 <a href="https://github.com/Rmanine/project-PoC-Test/blob/main/README.md"><img alt="Coverage" src="https://img.shields.io/badge/Coverage-80%25-green.svg" /></a><details><summary>Coverage Report </summary><table><tr><th>File</th><th>Stmts</th><th>Miss</th><th>Cover</th><th>Missing</th></tr><tbody><tr><td colspan="5"><b>src/hello_world</b></td></tr><tr><td>&nbsp; &nbsp;<a href="https://github.com/Rmanine/project-PoC-Test/blob/main/src/hello_world/__init__.py">__init__.py</a></td><td>0</td><td>0</td><td>100%</td><td>&nbsp;</td></tr><tr><td>&nbsp; &nbsp;<a href="https://github.com/Rmanine/project-PoC-Test/blob/main/src/hello_world/app.py">app.py</a></td><td>3</td><td>0</td><td>100%</td><td>&nbsp;</td></tr><tr><td colspan="5"><b>src/trusted_contacts</b></td></tr><tr><td>&nbsp; &nbsp;<a href="https://github.com/Rmanine/project-PoC-Test/blob/main/src/trusted_contacts/AwsDynamoApi.py">AwsDynamoApi.py</a></td><td>37</td><td>8</td><td>78%</td><td><a href="https://github.com/Rmanine/project-PoC-Test/blob/main/src/trusted_contacts/AwsDynamoApi.py#L39-L51">39&ndash;51</a>, <a href="https://github.com/Rmanine/project-PoC-Test/blob/main/src/trusted_contacts/AwsDynamoApi.py#L76-L80">76&ndash;80</a></td></tr><tr><td><b>TOTAL</b></td><td><b>40</b></td><td><b>8</b></td><td><b>80%</b></td><td>&nbsp;</td></tr></tbody></table></details>
 <!-- Pytest Coverage Comment:End -->
 
-# PoC - L’app che Protegge e Trasforma
-
-Proof of Concept per il capitolato C4 - L’ app che Protegge e Trasforma - del corso di Ingegneria del Software 2025/2026.
+[![Quality Gate Status](http://localhost:9000/api/project_badges/measure?project=prova-app_che_protegger_e_trasforma-MVP&metric=alert_status&token=sqb_5f299b6506e2019d3d5c9d5e893eba4f07982ace)](http://localhost:9000/dashboard?id=prova-app_che_protegger_e_trasforma-MVP)
 
 La documentazione completa relativa PoC si può consultare alla [Wiki](https://github.com/SWE-BitByBit/project-PoC/wiki) della presente repository.
 
-## Esecuzione test backend
+## Requisiti di sistema
+ 
+| Strumento | Versione minima | Note |
+|-----------|----------------|-------|
+| **Docker** | 24.x+ | Necessario per SonarQube |
+| **Docker Compose** | v2.x+ | Incluso in Docker Desktop |
+| **Python** | 3.12+ | Per il backend |
+| **Flutter** | 3.x+ | Per il frontend |
+| **AWS SAM CLI** | latest | Per build/deploy Lambda |
+| **Make** | qualsiasi | Per eseguire i comandi del Makefile |
 
-I test sono scritti utilizzando **pytest** e **moto** per simulare i servizi AWS (DynamoDB) in locale.  
-Non è necessario avere un account AWS attivo per eseguirli.
+### Guida per installazione AWS SAM CLI
+AWS SAM estende le funzionalità di AWS CDK e aggiungere funzionalità di building e di testing per applicazioni serverless.
 
-1. Posizionarsi nella cartella backend
+1. [Instllare AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+2. Configurare AWS CDK con le proprie credenziali
+
 ```bash
-cd backend
+$ aws configure
+AWS Access Key ID [None]: <tua_ID_accesso>
+AWS Secret Access Key [None]: <tua_chiave_accesso>
+Default region name [None]: ue-north-1
+Default output format [None]: json
 ```
-2. Creare e attivare l’ambiente virtuale (solo la prima volta)
+
+3. [Installare AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
+
+## Installazione dipendenze
+ 
+1. Clona la repo
+ 
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+git clone <url-repo>
+cd <nome-repo>
 ```
-3. Installare le dipendenze
+2. Backend (Python)
+ 
 ```bash
-pip install -r requirements.txt
+cd sam_local_backend
+make install        # crea il venv e installa le dipendenze
 ```
-4. Eseguire i test
+
+## Analisi della qualità del codice con SonarQube
+ 
+Il progetto usa **SonarQube** per l'analisi statica del codice.  
+L'istanza gira localmente tramite Docker — non è necessario installare nulla oltre a Docker.
+ 
+### Primo avvio (una tantum)
+ 
 ```bash
-PYTHONPATH=. pytest -v
+# Dalla root del progetto
+sudo chown -R 1000:1000 ./volumes/   # permessi necessari per SonarQube
+docker compose up -d                  # avvia SonarQube + PostgreSQL
 ```
+
 
 ## Setup ambiente 
 1. Crea un file `.env` nella cartella `frontend/`

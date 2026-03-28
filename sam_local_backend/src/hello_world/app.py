@@ -1,42 +1,30 @@
 import json
+import boto3
+import os
 
-# import requests
+def response(status, body):
+        return {
+            "statusCode": status,
+            "headers": {"Content-Type": "application/json"},
+            "body": json.dumps(body)
+        }
 
+def get_contact(table, event):
+    contact_id = event["pathParameters"]["contact_id"]
+    response = table.get_item(
+        Key={
+            "user_id": event["requestContext"]["authorizer"]["jwt"]["claims"]["sub"],
+            "contact_id": contact_id
+        }
+    )
+    item = response.get("Item")
+    if not item:
+        return response(404, {"msg": "Not found"})
+    return response(200, item)
 
 def lambda_handler(event, context):
-    """Sample pure Lambda function
+    dynamodb = boto3.resource("dynamodb")
+    table = dynamodb.Table(os.environ["TABLE_NAME"])
 
-    Parameters
-    ----------
-    event: dict, required
-        API Gateway Lambda Proxy Input Format
-
-        Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
-
-    context: object, required
-        Lambda Context runtime methods and attributes
-
-        Context doc: https://docs.aws.amazon.com/lambda/latest/dg/python-context-object.html
-
-    Returns
-    ------
-    API Gateway Lambda Proxy Output Format: dict
-
-        Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
-    """
-
-    # try:
-    #     ip = requests.get("http://checkip.amazonaws.com/")
-    # except requests.RequestException as e:
-    #     # Send some context about this error to Lambda Logs
-    #     print(e)
-
-    #     raise e
-
-    return {
-        "statusCode": 200,
-        "body": json.dumps({
-            "message": "hello world",
-            # "location": ip.text.replace("\n", "")
-        }),
-    }
+    if event.get("routeKey") ==  "GET /contacts/{contact_id}":
+        return get_contact(table, event)

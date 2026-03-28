@@ -1,6 +1,9 @@
 SHELL := /bin/bash
 PIP ?= pip3
 PYTHON ?= python3
+SONAR_TOKEN ?= sqp_2c0ce40a4aadcf5bd2592123f2e07c8ceb4ce5a6
+SONAR_HOST ?= http://localhost:9000
+DOCKER_COMPOSE_FILE ?= ../docker-compose.yml
 
 clean:
 	rm -rf ./venv/ .coverage coverage.xml pytest-coverage.txt pytest.xml htmlcov/
@@ -19,7 +22,11 @@ test:
 	source ./venv/bin/activate && pytest -v -s tests/unit/
 
 coverage:
-	source ./venv/bin/activate && pytest --junitxml=pytest.xml --cov-report=term-missing --cov=src tests/unit/ | tee pytest-coverage.txt
+	source ./venv/bin/activate && pytest \
+	--junitxml=pytest.xml \
+	--cov-report=term-missing \
+	--cov-report=xml:coverage.xml \
+	--cov=src tests/unit/ | tee pytest-coverage.txt
 
 coverage-html:
 	source ./venv/bin/activate && pytest -v -s \
@@ -29,6 +36,19 @@ coverage-html:
 		tests/unit/
 	@echo "Report disponibile in htmlcov/index.html"
 	@open htmlcov/index.html 2>/dev/null || xdg-open htmlcov/index.html 2>/dev/null || true
+
+sonar-up:
+	docker compose -f $(DOCKER_COMPOSE_FILE) up -d sonarqube db
+	@echo "✓ SonarQube pronto!"
+
+sonar-down:
+	docker compose -f $(DOCKER_COMPOSE_FILE) down
+
+sonar: sonar-up coverage
+	source ./venv/bin/activate && pysonar \
+  		--sonar-host-url=$(SONAR_HOST) \
+  		--sonar-token=$(SONAR_TOKEN) \
+  		--sonar-project-key=prova-app_che_protegger_e_trasforma-MVP
 
 build:
 	source ./venv/bin/activate && sam build
@@ -54,7 +74,9 @@ define HELP_MESSAGE
 	deps      		Install project dependencies locally
 	coverage  		Run tests + genera coverage.xml e pytest.xml (usati dalla CI)
     coverage-html 	Apre il report HTML nel browser
-
+	sonar-up        Avvia SonarQube e il DB via Docker
+	sonar-down      Ferma i container SonarQube
+	sonar           Avvia SonarQube (se necessario) + esegue analisi del codice
 	clean     		Cleans up local build artifacts and environment
 
 endef

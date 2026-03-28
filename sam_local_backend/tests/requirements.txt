@@ -4,3 +4,4 @@ moto
 requests
 coverage
 pytest-cov
+pysonar

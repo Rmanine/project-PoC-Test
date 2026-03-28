@@ -13,3 +13,4 @@ __pycache__/
 
 # variabili d'ambiente
 frontend/.env
+volumes/
