@@ -11,13 +11,13 @@ def response(status, body):
 
 def get_contact(table, event):
     contact_id = event["pathParameters"]["contact_id"]
-    response = table.get_item(
+    db_response = table.get_item(
         Key={
             "user_id": event["requestContext"]["authorizer"]["jwt"]["claims"]["sub"],
             "contact_id": contact_id
         }
     )
-    item = response.get("Item")
+    item = db_response.get("Item")
     if not item:
         return response(404, {"msg": "Not found"})
     return response(200, item)
