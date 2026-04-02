@@ -37,6 +37,11 @@ Default output format [None]: json
 
 3. [Installare AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
 
+## Eseguire il deploy 
+1. `cd sam sam_local_backend`
+2. `make install`
+3. `make deploy`
+
 ## Installazione dipendenze
  
 1. Clona la repo
