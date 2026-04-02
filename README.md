@@ -31,7 +31,7 @@ AWS SAM estende le funzionalità di AWS CDK e aggiungere funzionalità di buildi
 $ aws configure
 AWS Access Key ID [None]: <tua_ID_accesso>
 AWS Secret Access Key [None]: <tua_chiave_accesso>
-Default region name [None]: ue-north-1
+Default region name [None]: ue-south-1
 Default output format [None]: json
 ```
 
