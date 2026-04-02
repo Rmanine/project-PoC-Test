@@ -18,7 +18,7 @@ confirm_changeset = true
 resolve_s3 = false
 region = "eu-south-1"
 s3_bucket = "bucket-deploy-prova"
-s3_prefix = "Test-hello-world"
+s3_prefix = "ProvaSviluppo-test"
 
 [default.package.parameters]
 resolve_s3 = true
